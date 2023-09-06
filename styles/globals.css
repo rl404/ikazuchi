@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Mincho";
+  src: url(/fonts/mincho.woff2);
+}
+
+@layer base {
+  :root {
+    --ikz-background-image: url(/images/bg/0.jpg);
+    --ikz-background-overlay: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.8)
+    );
+    --ikz-primary: theme(colors.pink.600);
+    --ikz-secondary: theme(colors.amber.400);
+    --ikz-cinematic-bar: theme(spacing.14);
+  }
+
+  a {
+    @apply transition-all duration-300;
+  }
+
+  a:hover {
+    @apply opacity-70;
+  }
+
+  .gradient-text-none {
+    @apply bg-gradient-to-r from-white to-white bg-clip-text text-transparent;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+}
