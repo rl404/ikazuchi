@@ -63,7 +63,7 @@ export const useDispatchCtx = () => useContext(DispatchContext);
 
 export const reducer = (
   state: ContextType,
-  action: DispatchContextAction
+  action: DispatchContextAction,
 ): ContextType => {
   return { ...state, [action.type]: action.value };
 };

@@ -27,7 +27,7 @@ export default function List() {
           value: [
             ...ctx.data,
             ...resp.data.data.filter(
-              (d: Anime) => !ctx.data.find((dd) => dd.id === d.id)
+              (d: Anime) => !ctx.data.find((dd) => dd.id === d.id),
             ),
           ],
         });

@@ -17,13 +17,13 @@ export type Studio = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) {
   const resp = await fetch(
     `${process.env.API_HOST_AKATSUKI}/studios/${req.query.id}`,
     {
       method: req.method,
-    }
+    },
   );
 
   const data = await resp.json();
@@ -31,7 +31,7 @@ export default async function handler(
     .status(resp.status)
     .setHeader(
       "cache-control",
-      "max-age=3600, s-maxage=86400, stale-while-revalidate=3600"
+      "max-age=3600, s-maxage=86400, stale-while-revalidate=3600",
     )
     .json(data);
 }

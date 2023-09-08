@@ -367,5 +367,5 @@ export const BackgroundColors = [
 ];
 
 export const BackgroundImages = Array.from(Array(7).keys()).map(
-  (i) => `/images/bg/${i}.jpg`
+  (i) => `/images/bg/${i}.jpg`,
 );

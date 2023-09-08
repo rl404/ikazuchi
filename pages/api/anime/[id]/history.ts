@@ -25,7 +25,7 @@ export type AnimeHistory = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) {
   const queries = ["start_date", "end_date", "group"]
     .map((q) => `${q}=${req.query[q] ?? ""}`)
@@ -35,7 +35,7 @@ export default async function handler(
     `${process.env.API_HOST_AKATSUKI}/anime/${req.query.id}/history?${queries}`,
     {
       method: req.method,
-    }
+    },
   );
 
   const data = await resp.json();
@@ -43,7 +43,7 @@ export default async function handler(
     .status(resp.status)
     .setHeader(
       "cache-control",
-      "max-age=3600, s-maxage=86400, stale-while-revalidate=3600"
+      "max-age=3600, s-maxage=86400, stale-while-revalidate=3600",
     )
     .json(data);
 }
