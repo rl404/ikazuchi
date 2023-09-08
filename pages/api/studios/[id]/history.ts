@@ -20,7 +20,7 @@ export type StudioHistory = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) {
   const queries = ["start_year", "end_year", "group"]
     .map((q) => `${q}=${req.query[q] ?? ""}`)
@@ -30,7 +30,7 @@ export default async function handler(
     `${process.env.API_HOST_AKATSUKI}/studios/${req.query.id}/history?${queries}`,
     {
       method: req.method,
-    }
+    },
   );
 
   const data = await resp.json();
@@ -38,7 +38,7 @@ export default async function handler(
     .status(resp.status)
     .setHeader(
       "cache-control",
-      "max-age=3600, s-maxage=86400, stale-while-revalidate=3600"
+      "max-age=3600, s-maxage=86400, stale-while-revalidate=3600",
     )
     .json(data);
 }

@@ -9,7 +9,7 @@ import { addMonth, getCurrentSeason } from "@/libs/utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 
 export default function Home(
-  data: InferGetStaticPropsType<typeof getStaticProps>
+  data: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   if (
     !data.topSeasonal ||
@@ -102,10 +102,10 @@ export const getStaticProps: GetStaticProps<{
     studioCountRes,
   ] = await Promise.all([
     fetch(
-      `${process.env.API_HOST_AKATSUKI}/anime?season=${currentSeason}&season_year=${currentSeasonYear}&sort=POPULARITY&limit=16`
+      `${process.env.API_HOST_AKATSUKI}/anime?season=${currentSeason}&season_year=${currentSeasonYear}&sort=POPULARITY&limit=16`,
     ),
     fetch(
-      `${process.env.API_HOST_AKATSUKI}/anime?season=${nextSeason}&season_year=${nextSeasonYear}&sort=POPULARITY&limit=16`
+      `${process.env.API_HOST_AKATSUKI}/anime?season=${nextSeason}&season_year=${nextSeasonYear}&sort=POPULARITY&limit=16`,
     ),
     fetch(`${process.env.API_HOST_AKATSUKI}/anime?sort=POPULARITY&limit=16`),
     fetch(`${process.env.API_HOST_AKATSUKI}/anime?sort=RANK&limit=16`),

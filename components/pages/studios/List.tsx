@@ -29,7 +29,7 @@ export default function List() {
           value: [
             ...ctx.data,
             ...resp.data.data.filter(
-              (d: Genre) => !ctx.data.find((dd) => dd.id === d.id)
+              (d: Genre) => !ctx.data.find((dd) => dd.id === d.id),
             ),
           ],
         });
@@ -69,7 +69,7 @@ export default function List() {
                   (d) =>
                     (!l.match(/[a-z]/i) &&
                       !d.name.charAt(0).toLowerCase().match(/[a-z]/i)) ||
-                    d.name.charAt(0).toLowerCase() === l
+                    d.name.charAt(0).toLowerCase() === l,
                 ).length > 0 && (
                   <Fragment key={l}>
                     <div className="col-span-2 text-2xl font-bold text-primary md:col-span-3 lg:col-span-4 xl:col-span-5 2xl:col-span-6">
@@ -80,7 +80,7 @@ export default function List() {
                         (d) =>
                           (!l.match(/[a-z]/i) &&
                             !d.name.charAt(0).toLowerCase().match(/[a-z]/i)) ||
-                          d.name.charAt(0).toLowerCase() === l
+                          d.name.charAt(0).toLowerCase() === l,
                       )
                       .map((d) => (
                         <Link
@@ -93,7 +93,7 @@ export default function List() {
                         </Link>
                       ))}
                   </Fragment>
-                )
+                ),
             )
           : ctx.data.map((d) => (
               <Link

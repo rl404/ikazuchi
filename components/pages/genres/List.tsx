@@ -27,7 +27,7 @@ export default function List() {
           value: [
             ...ctx.data,
             ...resp.data.data.filter(
-              (d: Genre) => !ctx.data.find((dd) => dd.id === d.id)
+              (d: Genre) => !ctx.data.find((dd) => dd.id === d.id),
             ),
           ],
         });
