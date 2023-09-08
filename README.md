@@ -47,7 +47,7 @@ npm run dev
 
 ## Trivia
 
-[Ikazuchi](<https://en.wikipedia.org/wiki/Ikazuchi-class_destroyer>)'s name is taken from one of japanese destroyer. Also, [exists](https://en.kancollewiki.net/Ikazuchi) in Kantai Collection games and manga.
+[Ikazuchi](https://en.wikipedia.org/wiki/Ikazuchi-class_destroyer)'s name is taken from one of japanese destroyer. Also, [exists](https://en.kancollewiki.net/Ikazuchi) in Kantai Collection games and manga.
 
 ## Disclaimer
 

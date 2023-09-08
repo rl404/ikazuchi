@@ -7,7 +7,7 @@ import { Data } from "@/pages/api/studios/[id]";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 
 export default function StudioPage(
-  data: InferGetStaticPropsType<typeof getStaticProps>
+  data: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   if (!data.data) {
     return (
@@ -50,7 +50,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<Data> = async ({ params }) => {
   const res = await fetch(
-    `${process.env.API_HOST_AKATSUKI}/studios/${params?.id}`
+    `${process.env.API_HOST_AKATSUKI}/studios/${params?.id}`,
   );
 
   const resp = await res.json();

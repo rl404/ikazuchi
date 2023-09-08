@@ -78,7 +78,7 @@ export default function Details({ anime }: { anime: Anime }) {
           anime.episode.duration === 0
             ? undefined
             : `${parseInt(
-                (anime.episode.duration / 60).toFixed(0)
+                (anime.episode.duration / 60).toFixed(0),
               ).toLocaleString()} min`
         }
       />

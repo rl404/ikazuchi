@@ -146,7 +146,7 @@ export default function Statistics({ anime }: { anime: Anime }) {
                     domain: ([dataMin, dataMax]: [number, number]) => [
                       Math.max(
                         0,
-                        Math.floor(dataMin - (dataMax - dataMin) / 10)
+                        Math.floor(dataMin - (dataMax - dataMin) / 10),
                       ),
                       Math.ceil(dataMax + (dataMax - dataMin) / 10),
                     ],

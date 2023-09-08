@@ -90,7 +90,7 @@ export const useWindowSize = () => {
         screenSizes.reduce((res, curr) => {
           if (width >= curr.value) return curr.size;
           return res;
-        }, "sm")
+        }, "sm"),
       );
     };
 

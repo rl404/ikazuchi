@@ -44,7 +44,7 @@ export default function InitTransition() {
     setBgImages(bgImages);
     setCSSVariable(
       `--ikz-background-image`,
-      `url(${bgImages[bgImages.length - 1]})`
+      `url(${bgImages[bgImages.length - 1]})`,
     );
   }, []);
 
