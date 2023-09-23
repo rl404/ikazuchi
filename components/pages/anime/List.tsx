@@ -11,7 +11,7 @@ export default function List() {
   const ctx = useCtx();
   const dispatch = useDispatchCtx();
 
-  const onSearch = () => {
+  const onSearch = (controller: AbortController) => {
     dispatch({ type: "loading", value: true });
     dispatch({ type: "error", value: "" });
 
@@ -20,7 +20,9 @@ export default function List() {
       .join("&");
 
     axios
-      .get(`/api/anime?${queries}`)
+      .get(`/api/anime?${queries}`, {
+        signal: controller.signal,
+      })
       .then((resp) => {
         dispatch({
           type: "data",
@@ -46,7 +48,13 @@ export default function List() {
   };
 
   useEffect(() => {
-    onSearch();
+    const controller = new AbortController();
+
+    onSearch(controller);
+
+    return () => {
+      controller.abort();
+    };
   }, [ctx.queries]);
 
   return (
