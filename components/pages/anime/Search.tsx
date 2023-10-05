@@ -120,18 +120,10 @@ export default function Search() {
   }, [queries]);
 
   useEffect(() => {
-    const controller = new AbortController();
+    axios.get(`/api/genres?limit=-1`).then((resp) => setGenres(resp.data.data));
 
     axios
-      .get(`/api/genres?limit=-1`, {
-        signal: controller.signal,
-      })
-      .then((resp) => setGenres(resp.data.data));
-
-    axios
-      .get(`/api/studios?limit=-1`, {
-        signal: controller.signal,
-      })
+      .get(`/api/studios?limit=-1`)
       .then((resp) => setStudios(resp.data.data));
 
     setQueries({
@@ -148,10 +140,6 @@ export default function Search() {
       studioID: params.get("studio_id") || "",
       sort: params.get("sort") || Sort.popularityAsc,
     });
-
-    return () => {
-      controller.abort();
-    };
   }, []);
 
   return (

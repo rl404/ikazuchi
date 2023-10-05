@@ -25,19 +25,11 @@ export default function Statistics({ anime }: { anime: Anime }) {
       : HistoryGroup.weekly;
 
   useEffect(() => {
-    const controller = new AbortController();
-
     axios
-      .get(`/api/anime/${anime.id}/history?group=${group}`, {
-        signal: controller.signal,
-      })
+      .get(`/api/anime/${anime.id}/history?group=${group}`)
       .then((resp) => setData(resp.data.data))
       .catch((err) => setError(getAxiosError(err)))
       .finally(() => setLoading(false));
-
-    return () => {
-      controller.abort();
-    };
   }, []);
 
   return (

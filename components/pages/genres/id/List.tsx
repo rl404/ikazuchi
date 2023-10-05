@@ -39,19 +39,11 @@ const TopList = ({
   const screenSize = useWindowSize();
 
   useEffect(() => {
-    const controller = new AbortController();
-
     axios
-      .get(`/api/anime?genre_id=${genre.id}&sort=${sort}&limit=16`, {
-        signal: controller.signal,
-      })
+      .get(`/api/anime?genre_id=${genre.id}&sort=${sort}&limit=16`)
       .then((resp) => setData(resp.data.data))
       .catch((err) => setError(getAxiosError(err)))
       .finally(() => setLoading(false));
-
-    return () => {
-      controller.abort();
-    };
   }, []);
 
   return (

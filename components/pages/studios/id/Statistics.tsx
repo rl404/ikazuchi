@@ -14,19 +14,11 @@ export default function Statistics({ studio }: { studio: Studio }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const controller = new AbortController();
-
     axios
-      .get(`/api/studios/${studio.id}/history?group=MONTHLY`, {
-        signal: controller.signal,
-      })
+      .get(`/api/studios/${studio.id}/history?group=MONTHLY`)
       .then((resp) => setData(resp.data.data))
       .catch((err) => setError(getAxiosError(err)))
       .finally(() => setLoading(false));
-
-    return () => {
-      controller.abort();
-    };
   }, []);
 
   return (
