@@ -103,9 +103,9 @@ export const useWindowSize = () => {
 };
 
 export const getCurrentSeason = (month = new Date().getMonth()): string => {
-  if (month >= 4 && month <= 6) return Season.spring;
-  if (month >= 7 && month <= 9) return Season.summer;
-  if (month >= 10 && month <= 12) return Season.fall;
+  if (month >= 3 && month <= 5) return Season.spring;
+  if (month >= 6 && month <= 8) return Season.summer;
+  if (month >= 9 && month <= 11) return Season.fall;
   return Season.winter;
 };
 
