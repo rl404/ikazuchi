@@ -51,6 +51,13 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
     props: {
       title: query.title || "",
+      nsfw: query.nsfw || "",
+      type: query.type || "",
+      status: query.status || "",
+      season: query.season || "",
+      season_year: query.season_year || "",
+      start_mean: query.start_mean || "",
+      end_mean: query.end_mean || "",
       genre_id: query.genre_id || "",
       studio_id: query.studio_id || "",
       sort: query.sort || "",

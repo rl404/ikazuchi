@@ -1,5 +1,5 @@
 import IconButton from "@/components/buttons/IconButton";
-import { useCtx, useDispatchCtx } from "@/components/contexts/GenreContext";
+import { useCtx, useDispatchCtx } from "@/components/contexts/AnimeContext";
 import ConfigIcon from "@/components/icons/ConfigIcon";
 import SearchIcon from "@/components/icons/SearchIcon";
 import Select from "@/components/inputs/Select";
