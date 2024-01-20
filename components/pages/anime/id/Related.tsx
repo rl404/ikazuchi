@@ -8,6 +8,10 @@ import Link from "next/link";
 const relationOrder = Object.values(AnimeRelation);
 
 export default function Related({ anime }: { anime: Anime }) {
+  if (anime.related.length === 0) {
+    return;
+  }
+
   anime.related.sort((a, b) => {
     const ai = relationOrder.findIndex((v) => v === a.relation);
     const bi = relationOrder.findIndex((v) => v === b.relation);

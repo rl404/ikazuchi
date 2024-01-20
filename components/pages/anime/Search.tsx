@@ -140,7 +140,7 @@ export default function Search() {
       studioID: params.get("studio_id") || "",
       sort: params.get("sort") || Sort.popularityAsc,
     });
-  }, []);
+  }, [params]);
 
   return (
     <div className="grid">
