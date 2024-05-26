@@ -11,7 +11,13 @@ import Title from "@/components/pages/studios/Title";
 import { GetServerSideProps } from "next";
 import { ReactNode, useReducer } from "react";
 
-export default function StudiosPage() {
+export default function StudiosPage({
+  name,
+  sort,
+}: {
+  name: string;
+  sort: string;
+}) {
   return (
     <>
       <Head
@@ -19,7 +25,7 @@ export default function StudiosPage() {
         description="Search anime studio database with Bakemonogatari theme."
         image="/images/studios.jpg"
       />
-      <Browse>
+      <Browse name={name} sort={sort}>
         <div className="grid gap-4">
           <div>
             <Title />
@@ -36,8 +42,23 @@ export default function StudiosPage() {
   );
 }
 
-const Browse = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(reducer, defaultCtx);
+const Browse = ({
+  name,
+  sort,
+  children,
+}: {
+  name: string;
+  sort: string;
+  children: ReactNode;
+}) => {
+  const [state, dispatch] = useReducer(reducer, {
+    ...defaultCtx,
+    queries: {
+      ...defaultCtx.queries,
+      name: name,
+      sort: sort,
+    },
+  });
   return (
     <Context.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
@@ -49,6 +70,9 @@ const Browse = ({ children }: { children: ReactNode }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
-    props: { name: query.name || "" },
+    props: {
+      name: query.name || "",
+      sort: query.sort || "NAME",
+    },
   };
 };
