@@ -68,7 +68,7 @@ export default function Home(
         <div>
           <Grid
             title="Top Ranking"
-            link={`/anime?sort=RANKING`}
+            link={`/anime?sort=RANK`}
             data={data.topRank.data}
           />
         </div>
