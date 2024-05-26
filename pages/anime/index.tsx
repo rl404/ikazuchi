@@ -8,10 +8,35 @@ import {
 import List from "@/components/pages/anime/List";
 import Search from "@/components/pages/anime/Search";
 import Title from "@/components/pages/anime/Title";
+import { Sort } from "@/libs/constant";
 import { GetServerSideProps } from "next";
 import { ReactNode, useReducer } from "react";
 
-export default function AnimePage() {
+export default function AnimePage({
+  title,
+  nsfw,
+  type,
+  status,
+  season,
+  season_year,
+  start_mean,
+  end_mean,
+  genre_id,
+  studio_id,
+  sort,
+}: {
+  title: string;
+  nsfw: string;
+  type: string;
+  status: string;
+  season: string;
+  season_year: string;
+  start_mean: string;
+  end_mean: string;
+  genre_id: string;
+  studio_id: string;
+  sort: string;
+}) {
   return (
     <>
       <Head
@@ -19,7 +44,19 @@ export default function AnimePage() {
         description="Search anime database with Bakemonogatari theme."
         image="/images/anime.jpg"
       />
-      <Browse>
+      <Browse
+        title={title}
+        nsfw={nsfw}
+        type={type}
+        status={status}
+        season={season}
+        season_year={season_year}
+        start_mean={start_mean}
+        end_mean={end_mean}
+        genre_id={genre_id}
+        studio_id={studio_id}
+        sort={sort}
+      >
         <div className="grid gap-4">
           <div>
             <Title />
@@ -36,8 +73,50 @@ export default function AnimePage() {
   );
 }
 
-const Browse = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(reducer, defaultCtx);
+const Browse = ({
+  title,
+  nsfw,
+  type,
+  status,
+  season,
+  season_year,
+  start_mean,
+  end_mean,
+  genre_id,
+  studio_id,
+  sort,
+  children,
+}: {
+  title: string;
+  nsfw: string;
+  type: string;
+  status: string;
+  season: string;
+  season_year: string;
+  start_mean: string;
+  end_mean: string;
+  genre_id: string;
+  studio_id: string;
+  sort: string;
+  children: ReactNode;
+}) => {
+  const [state, dispatch] = useReducer(reducer, {
+    ...defaultCtx,
+    queries: {
+      ...defaultCtx.queries,
+      title: title,
+      nsfw: nsfw,
+      type: type,
+      status: status,
+      season: season,
+      season_year: season_year,
+      start_mean: start_mean,
+      end_mean: end_mean,
+      genre_id: genre_id,
+      studio_id: studio_id,
+      sort: sort,
+    },
+  });
   return (
     <Context.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
@@ -51,7 +130,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
     props: {
       title: query.title || "",
-      nsfw: query.nsfw || "",
+      nsfw: query.nsfw || "false",
       type: query.type || "",
       status: query.status || "",
       season: query.season || "",
@@ -60,7 +139,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       end_mean: query.end_mean || "",
       genre_id: query.genre_id || "",
       studio_id: query.studio_id || "",
-      sort: query.sort || "",
+      sort: query.sort || Sort.popularityAsc,
     },
   };
 };

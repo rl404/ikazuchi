@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <div
         ref={ref}
         id="ikazuchi-content"
-        className="fixed top-cinematic-bar h-cinematic w-full overflow-scroll bg-image bg-cover bg-fixed bg-center"
+        className="fixed top-cinematic-bar h-cinematic w-full overflow-auto bg-image bg-cover bg-fixed bg-center"
       >
         <RouteTransition resetScroll={resetScroll}>
           <div className="container mx-auto p-4">{children}</div>

@@ -3,48 +3,42 @@ import SearchIcon from "@/components/icons/SearchIcon";
 import TextInput from "@/components/inputs/TextInput";
 import { inViewVariants } from "@/components/transitions/variants";
 import { motion } from "framer-motion";
-import { useSearchParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
 export default function Search() {
   const ctx = useCtx();
   const dispatch = useDispatchCtx();
-  const params = useSearchParams();
 
-  const [name, setName] = useState("");
-  const [sort, setSort] = useState("NAME");
+  const [query, setQuery] = useState(ctx.queries);
 
   const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+    setQuery({ ...query, name: e.target.value });
   };
 
   const onSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSort(e.target.value);
+    setQuery({ ...query, sort: e.target.value });
   };
 
   useEffect(() => {
     const searchDelay = setTimeout(() => {
-      if (name.trim() === ctx.queries.name && sort === ctx.queries.sort) return;
+      if (
+        query.name.trim() === ctx.queries.name &&
+        query.sort === ctx.queries.sort
+      )
+        return;
       dispatch({ type: "data", value: [] });
       dispatch({
         type: "queries",
         value: {
           ...ctx.queries,
-          name: name.trim(),
-          sort: sort,
+          name: query.name.trim(),
+          sort: query.sort,
           page: 1,
         },
       });
     }, 500);
     return () => clearTimeout(searchDelay);
-  }, [name, sort]);
-
-  useEffect(() => {
-    const name = params.get("name");
-    const sort = params.get("sort");
-    if (name && name !== "") setName(name);
-    if (sort && sort !== "") setSort(sort);
-  }, []);
+  }, [query]);
 
   return (
     <motion.div
@@ -56,7 +50,7 @@ export default function Search() {
       <div className="relative">
         <SearchIcon className="pointer-events-none absolute h-full p-2.5 text-neutral-400" />
         <TextInput
-          value={name}
+          value={query.name}
           placeholder="genre name..."
           onChange={onNameChange}
           className="w-full pl-8"
@@ -69,7 +63,7 @@ export default function Search() {
         <div className="flex items-start gap-2 text-xs font-bold text-secondary">
           <label>Sort by</label>
           <select
-            value={sort}
+            value={query.sort}
             onChange={onSortChange}
             className="appearance-none bg-transparent"
           >
