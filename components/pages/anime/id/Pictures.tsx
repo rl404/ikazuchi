@@ -42,7 +42,7 @@ export default function Pictures({ anime }: { anime: Anime }) {
         />
       </motion.div>
       <div className="flex justify-center">
-        <div className="flex items-center gap-1 overflow-x-scroll md:grid md:grid-cols-3 lg:grid-cols-5">
+        <div className="flex items-center gap-1 overflow-x-auto md:grid md:grid-cols-3 lg:grid-cols-5">
           {anime.pictures.map((p, i) => (
             <Image
               key={i}

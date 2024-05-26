@@ -18,7 +18,6 @@ import { Genre } from "@/pages/api/genres/[id]";
 import { Studio } from "@/pages/api/studios/[id]";
 import axios from "axios";
 import { Variants, motion } from "framer-motion";
-import { useSearchParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const variants: Variants = {
@@ -29,24 +28,11 @@ const variants: Variants = {
 export default function Search() {
   const ctx = useCtx();
   const dispatch = useDispatchCtx();
-  const params = useSearchParams();
 
   const [show, setShow] = useState(false);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [studios, setStudios] = useState<Studio[]>([]);
-  const [queries, setQueries] = useState({
-    title: "",
-    nsfw: "false",
-    type: "",
-    status: "",
-    season: "",
-    seasonYear: "",
-    startMean: "",
-    endMean: "",
-    genreID: "",
-    studioID: "",
-    sort: Sort.popularityAsc,
-  });
+  const [queries, setQueries] = useState(ctx.queries);
 
   const toggleShow = () => setShow(!show);
 
@@ -67,23 +53,23 @@ export default function Search() {
   };
 
   const onSeasonYearChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setQueries({ ...queries, seasonYear: e.target.value });
+    setQueries({ ...queries, season_year: e.target.value });
   };
 
   const onStartMeanChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setQueries({ ...queries, startMean: e.target.value });
+    setQueries({ ...queries, start_mean: e.target.value });
   };
 
   const onEndMeanChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setQueries({ ...queries, endMean: e.target.value });
+    setQueries({ ...queries, end_mean: e.target.value });
   };
 
   const onGenreChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setQueries({ ...queries, genreID: e.target.value });
+    setQueries({ ...queries, genre_id: e.target.value });
   };
 
   const onStudioChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setQueries({ ...queries, studioID: e.target.value });
+    setQueries({ ...queries, studio_id: e.target.value });
   };
 
   const onNSFWChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -106,11 +92,11 @@ export default function Search() {
           type: queries.type,
           status: queries.status,
           season: queries.season,
-          season_year: queries.seasonYear,
-          start_mean: queries.startMean,
-          end_mean: queries.endMean,
-          genre_id: queries.genreID,
-          studio_id: queries.studioID,
+          season_year: queries.season_year,
+          start_mean: queries.start_mean,
+          end_mean: queries.end_mean,
+          genre_id: queries.genre_id,
+          studio_id: queries.studio_id,
           sort: queries.sort,
           page: 1,
         },
@@ -125,21 +111,6 @@ export default function Search() {
     axios
       .get(`/api/studios?limit=-1`)
       .then((resp) => setStudios(resp.data.data));
-
-    setQueries({
-      ...queries,
-      title: params.get("title") || "",
-      nsfw: params.get("nsfw") || "false",
-      type: params.get("type") || "",
-      status: params.get("status") || "",
-      season: params.get("season") || "",
-      seasonYear: params.get("season_year") || "",
-      startMean: params.get("start_mean") || "",
-      endMean: params.get("end_mean") || "",
-      genreID: params.get("genre_id") || "",
-      studioID: params.get("studio_id") || "",
-      sort: params.get("sort") || Sort.popularityAsc,
-    });
   }, []);
 
   return (
@@ -224,7 +195,7 @@ export default function Search() {
           <label className="font-bold">Season Year</label>
           <TextInput
             placeholder="Any"
-            value={queries.seasonYear}
+            value={queries.season_year}
             onChange={onSeasonYearChange}
             numberOnly={true}
           />
@@ -236,13 +207,17 @@ export default function Search() {
             <Select
               className="grow"
               options={[
-                { label: "Any", value: "", selected: queries.startMean === "" },
+                {
+                  label: "Any",
+                  value: "",
+                  selected: queries.start_mean === "",
+                },
                 ...Array(11)
                   .fill(0)
                   .map((v, i) => ({
                     label: i.toString(),
                     value: i.toString(),
-                    selected: queries.startMean === i.toString(),
+                    selected: queries.start_mean === i.toString(),
                   })),
               ]}
               onChange={onStartMeanChange}
@@ -251,13 +226,13 @@ export default function Search() {
             <Select
               className="grow"
               options={[
-                { label: "Any", value: "", selected: queries.endMean === "" },
+                { label: "Any", value: "", selected: queries.end_mean === "" },
                 ...Array(11)
                   .fill(0)
                   .map((v, i) => ({
                     label: i.toString(),
                     value: i.toString(),
-                    selected: queries.endMean === i.toString(),
+                    selected: queries.end_mean === i.toString(),
                   })),
               ]}
               onChange={onEndMeanChange}
@@ -270,11 +245,11 @@ export default function Search() {
           <Select
             className="w-full"
             options={[
-              { label: "Any", value: "", selected: queries.genreID === "" },
+              { label: "Any", value: "", selected: queries.genre_id === "" },
               ...genres.map((g) => ({
                 label: g.name,
                 value: g.id.toString(),
-                selected: queries.genreID === g.id.toString(),
+                selected: queries.genre_id === g.id.toString(),
               })),
             ]}
             onChange={onGenreChange}
@@ -286,11 +261,11 @@ export default function Search() {
           <Select
             className="w-full"
             options={[
-              { label: "Any", value: "", selected: queries.studioID === "" },
+              { label: "Any", value: "", selected: queries.studio_id === "" },
               ...studios.map((s) => ({
                 label: s.name,
                 value: s.id.toString(),
-                selected: queries.studioID === s.id.toString(),
+                selected: queries.studio_id === s.id.toString(),
               })),
             ]}
             onChange={onStudioChange}

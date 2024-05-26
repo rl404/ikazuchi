@@ -72,10 +72,10 @@ export default function List() {
               {ctx.queries.sort === "-COUNT"
                 ? d.count.toLocaleString()
                 : ctx.queries.sort === "-MEAN"
-                ? d.mean.toFixed(2)
-                : ctx.queries.sort === "-MEMBER"
-                ? compactInt(d.member)
-                : ""}
+                  ? d.mean.toFixed(2)
+                  : ctx.queries.sort === "-MEMBER"
+                    ? compactInt(d.member)
+                    : ""}
             </span>
           </Link>
         ))}
