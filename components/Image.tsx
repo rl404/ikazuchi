@@ -2,7 +2,7 @@ import ImageIcon from "./icons/ImageIcon";
 import LinkSlashIcon from "./icons/LinkSlashIcon";
 import { useEffect, useState } from "react";
 
-export default function _Image({
+export default function IkzImage({
   className,
   src,
   alt,
