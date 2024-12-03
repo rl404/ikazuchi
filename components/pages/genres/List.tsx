@@ -1,6 +1,6 @@
 import { useCtx, useDispatchCtx } from "@/components/contexts/GenreContext";
 import SpinnerIcon from "@/components/icons/SpinnerIcon";
-import { compactInt, getAxiosError } from "@/libs/utils";
+import { compactInt, getAxiosError, toURL } from "@/libs/utils";
 import { Genre } from "@/pages/api/genres/[id]";
 import axios from "axios";
 import Link from "next/link";
@@ -65,7 +65,7 @@ export default function List() {
             key={d.id}
             title={d.name}
             className="flex flex-nowrap items-center justify-between gap-1 rounded border border-neutral-800 p-2 font-bold hover:border-primary hover:opacity-100"
-            href={`/genres/${d.id}/${d.name}`}
+            href={`/genres/${d.id}/${toURL(d.name)}`}
           >
             <span className="line-clamp-1">{d.name}</span>
             <span className="font-normal text-secondary">

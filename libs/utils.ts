@@ -113,3 +113,7 @@ export const addMonth = (date: Date, month: number): Date => {
   date.setMonth(date.getMonth() + month);
   return date;
 };
+
+export const toURL = (str: string): string => {
+  return str.replace(/[^a-zA-Z0-9-]+/g, "_").replace(/^_+|_+$/g, "");
+};
