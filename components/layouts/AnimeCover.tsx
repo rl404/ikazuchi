@@ -1,5 +1,6 @@
 import Image from "@/components/Image";
 import { inViewVariants } from "@/components/transitions/variants";
+import { toURL } from "@/libs/utils";
 import { Anime } from "@/pages/api/anime/[id]";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -21,7 +22,7 @@ export default function AnimeCover({
     >
       <Link
         className="flex aspect-cover rounded outline outline-1 outline-transparent hover:opacity-100 hover:outline-primary"
-        href={`/anime/${anime.id}/${anime.title}`}
+        href={`/anime/${anime.id}/${toURL(anime.title)}`}
       >
         <Image
           src={anime.picture}
@@ -31,7 +32,7 @@ export default function AnimeCover({
       </Link>
       <Link
         className="mt-1 line-clamp-2 text-sm font-bold"
-        href={`/anime/${anime.id}/${anime.title}`}
+        href={`/anime/${anime.id}/${toURL(anime.title)}`}
       >
         {anime.title}
       </Link>

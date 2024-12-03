@@ -1,6 +1,7 @@
 import Image from "@/components/Image";
 import { inViewVariants } from "@/components/transitions/variants";
 import { AnimeRelation, AnimeRelationToStr } from "@/libs/constant";
+import { toURL } from "@/libs/utils";
 import { Anime, Related as _Related } from "@/pages/api/anime/[id]";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -45,7 +46,7 @@ const RelatedCard = ({ anime }: { anime: _Related }) => {
       <Link
         className="flex aspect-card gap-1 outline outline-1 outline-transparent hover:cursor-pointer hover:opacity-100 hover:outline-pink-600"
         title={anime.title}
-        href={`/anime/${anime.id}/${anime.title}`}
+        href={`/anime/${anime.id}/${toURL(anime.title)}`}
       >
         <div className="basis-1/3">
           <Image
