@@ -1,10 +1,10 @@
-import { TooltipProps } from "recharts";
+import { TooltipContentProps,  } from "recharts";
 
 export default function ChartTooltip({
   active,
   payload,
   label,
-}: TooltipProps<any, any>) {
+}: TooltipContentProps<any, any>) {
   if (!(active && payload && payload.length)) return;
   return (
     <div className="grid border border-neutral-600 bg-black p-2 text-center">
