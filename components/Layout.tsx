@@ -1,5 +1,7 @@
 import Menu from "./Menu";
+import SearchIcon from "./icons/SearchIcon";
 import RouteTransition from "./transitions/RouteTransition";
+import Link from "next/link";
 import { ReactNode, useRef } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -21,6 +23,12 @@ export default function Layout({ children }: { children: ReactNode }) {
         </RouteTransition>
       </div>
       <Menu />
+      <Link
+        href="/anime"
+        className="fixed right-4 top-4 z-10 flex items-center"
+      >
+        <SearchIcon className="size-6" />
+      </Link>
     </div>
   );
 }
