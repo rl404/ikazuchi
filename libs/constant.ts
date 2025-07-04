@@ -5,6 +5,9 @@ export const AnimeType = {
   movie: "MOVIE",
   special: "SPECIAL",
   music: "MUSIC",
+  cm: "CM",
+  pv: "PV",
+  tv_special: "TV_SPECIAL",
 };
 
 export const AnimeTypeToStr = (type: string): string => {
@@ -21,6 +24,12 @@ export const AnimeTypeToStr = (type: string): string => {
       return "Special";
     case AnimeType.music:
       return "Music";
+    case AnimeType.cm:
+      return "CM";
+    case AnimeType.pv:
+      return "PV";
+    case AnimeType.tv_special:
+      return "TV Special";
     default:
       return "-";
   }
