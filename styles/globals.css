@@ -1,56 +1,66 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer base {
-  @font-face {
-    font-family: "Mincho";
-    src: url(/fonts/mincho.woff2);
-  }
-
-  :root {
-    --ikz-background-image: url(/images/bg/0.jpg);
-    --ikz-background-overlay: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.8),
-      rgba(0, 0, 0, 0.8)
-    );
-    --ikz-primary: theme(colors.pink.600);
-    --ikz-secondary: theme(colors.amber.400);
-    --ikz-cinematic-bar: theme(spacing.14);
-  }
-
-  a {
-    @apply transition-all duration-300;
-  }
-
-  a:hover {
-    @apply opacity-70;
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: rgb(18, 18, 18);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(117, 117, 117);
-  }
+@theme inline {
+	--font-mincho: 'Mincho';
+	--color-primary: var(--ikz-primary);
+	--color-secondary: var(--ikz-secondary);
+	--spacing-cinematic: calc(100% - var(--ikz-cinematic-bar) * 2);
+	--spacing-cinematic-bar: var(--ikz-cinematic-bar);
+	--aspect-cover: 7/10;
+	--aspect-card: 3/1;
 }
 
-@layer components {
-  .gradient-text-none {
-    @apply bg-gradient-to-r from-white to-white bg-clip-text text-transparent;
-  }
+@layer base {
+	:root {
+		--ikz-background-image: url(/images/bg/0.jpg);
+		--ikz-background-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+		--ikz-primary: theme(colors.pink.600);
+		--ikz-secondary: theme(colors.amber.400);
+		--ikz-cinematic-bar: theme(spacing.14);
+	}
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
-  }
+	@font-face {
+		font-family: 'Mincho';
+		src: url(/fonts/mincho.woff2);
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: rgb(18, 18, 18);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.08);
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: rgb(117, 117, 117);
+	}
+
+	a {
+		@apply transition-all duration-300;
+	}
+
+	a:hover {
+		@apply opacity-70;
+	}
+
+	button {
+		@apply cursor-pointer;
+	}
+}
+
+@utility bg-image {
+	background-image: var(--ikz-background-overlay), var(--ikz-background-image);
+}
+
+@utility gradient-text-none {
+	@apply bg-gradient-to-r from-white to-white bg-clip-text text-transparent;
+}
+
+@utility gradient-text {
+	@apply from-primary to-secondary bg-gradient-to-r bg-clip-text text-transparent;
 }
