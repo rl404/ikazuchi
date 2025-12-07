@@ -7,6 +7,7 @@ import { StudioHistory } from '@/pages/api/studios/[id]/history';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { NumberDomain } from 'recharts/types/util/types';
 
 export default function Statistics({ studio }: { studio: Studio }) {
 	const [data, setData] = useState<StudioHistory[]>([]);
@@ -47,7 +48,7 @@ export default function Statistics({ studio }: { studio: Studio }) {
 									name: 'rank',
 									reversed: true,
 									color: '#db2777',
-									domain: ([dataMin, dataMax]: [number, number]) => [
+									domain: ([dataMin, dataMax]: NumberDomain) => [
 										Math.max(0, Math.floor(dataMin - (dataMax - dataMin) / 10)),
 										Math.ceil(dataMax + (dataMax - dataMin) / 10)
 									],
@@ -57,7 +58,7 @@ export default function Statistics({ studio }: { studio: Studio }) {
 									name: 'popularity',
 									reversed: true,
 									color: '#fbbf24',
-									domain: ([dataMin, dataMax]: [number, number]) => [
+									domain: ([dataMin, dataMax]: NumberDomain) => [
 										Math.max(0, Math.floor(dataMin - (dataMax - dataMin) / 10)),
 										Math.ceil(dataMax + (dataMax - dataMin) / 10)
 									],
@@ -102,7 +103,7 @@ export default function Statistics({ studio }: { studio: Studio }) {
 								value2: {
 									name: 'count',
 									color: '#fbbf24',
-									domain: ([dataMin, dataMax]: [number, number]) => [
+									domain: ([dataMin, dataMax]: NumberDomain) => [
 										Math.max(0, Math.floor(dataMin - (dataMax - dataMin) / 10)),
 										Math.ceil(dataMax + (dataMax - dataMin) / 10)
 									],
