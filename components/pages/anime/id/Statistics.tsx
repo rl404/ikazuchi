@@ -10,6 +10,7 @@ import { AnimeHistory } from '@/pages/api/anime/[id]/history';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { NumberDomain } from 'recharts/types/util/types';
 
 export default function Statistics({ anime }: { anime: Anime }) {
 	const [data, setData] = useState<AnimeHistory[]>([]);
@@ -76,7 +77,7 @@ export default function Statistics({ anime }: { anime: Anime }) {
 									name: 'rank',
 									reversed: true,
 									color: '#db2777',
-									domain: ([dataMin, dataMax]: [number, number]) => [
+									domain: ([dataMin, dataMax]: NumberDomain) => [
 										Math.max(0, Math.floor(dataMin - (dataMax - dataMin) / 10)),
 										Math.ceil(dataMax + (dataMax - dataMin) / 10)
 									],
@@ -86,7 +87,7 @@ export default function Statistics({ anime }: { anime: Anime }) {
 									name: 'popularity',
 									reversed: true,
 									color: '#fbbf24',
-									domain: ([dataMin, dataMax]: [number, number]) => [
+									domain: ([dataMin, dataMax]: NumberDomain) => [
 										Math.max(0, Math.floor(dataMin - (dataMax - dataMin) / 10)),
 										Math.ceil(dataMax + (dataMax - dataMin) / 10)
 									],
@@ -136,7 +137,7 @@ export default function Statistics({ anime }: { anime: Anime }) {
 									value2: {
 										name: 'member',
 										color: '#fbbf24',
-										domain: ([dataMin, dataMax]: [number, number]) => [
+										domain: ([dataMin, dataMax]: NumberDomain) => [
 											Math.max(0, Math.floor(dataMin - (dataMax - dataMin) / 10)),
 											Math.ceil(dataMax + (dataMax - dataMin) / 10)
 										],
