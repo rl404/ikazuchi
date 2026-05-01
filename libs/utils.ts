@@ -1,6 +1,7 @@
 import { Season } from './constant';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
+import { TooltipPayloadEntry } from 'recharts';
 
 export const shuffle = (arr: any[]): any[] => {
 	for (let i = arr.length - 1; i > 0; i--) {
@@ -118,4 +119,16 @@ export const addMonth = (date: Date, month: number): Date => {
 
 export const toURL = (str: string): string => {
 	return str.replace(/[^a-zA-Z0-9-]+/g, '_').replace(/^_+|_+$/g, '');
+};
+
+export const getTooltipValue = (p: TooltipPayloadEntry): string => {
+  if (typeof p.value === 'string') {
+    return p.value;
+  }
+
+  if (typeof p.value === 'number') {
+    return p.value % 1 != 0 ? p.value.toFixed(2).toLocaleString() : p.value.toLocaleString();
+  }
+
+  return '0';
 };
