@@ -1,3 +1,4 @@
+import { getTooltipValue } from '@/libs/utils';
 import { TooltipContentProps } from 'recharts';
 
 export default function ChartTooltip({ active, payload, label }: TooltipContentProps<any, any>) {
@@ -7,14 +8,7 @@ export default function ChartTooltip({ active, payload, label }: TooltipContentP
 			<div>{label}</div>
 			{payload.map((p) => (
 				<div key={p.name}>
-					{`${p.name} : `}
-					{typeof p.value === 'string'
-						? p.value
-						: !p.value
-							? 0
-							: p.value % 1 != 0
-								? p.value.toFixed(2).toLocaleString()
-								: p.value.toLocaleString()}
+					{`${p.name} : ${getTooltipValue(p)}`}
 				</div>
 			))}
 		</div>
