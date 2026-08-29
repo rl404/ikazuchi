@@ -12,6 +12,8 @@ export default function List() {
 	const dispatch = useDispatchCtx();
 
 	const onSearch = () => {
+		if (ctx.loading) return;
+
 		dispatch({ type: 'loading', value: true });
 		dispatch({ type: 'error', value: '' });
 
