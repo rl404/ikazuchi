@@ -39,7 +39,7 @@ export const defaultCtx: ContextType = {
 		studio_id: '',
 		sort: Sort.popularityAsc,
 		page: 1,
-		limit: 20
+		limit: 50
 	},
 	loading: false,
 	error: '',
