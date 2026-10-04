@@ -1,0 +1,8 @@
+services:
+  ikazuchi:
+    container_name: ikazuchi
+    image: rl404/ikazuchi:latest
+    build: .
+    restart: always
+    env_file: .env
+    network_mode: host
