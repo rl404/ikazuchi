@@ -3,30 +3,45 @@ name: publish
 on:
   push:
     tags:
-      - "*"
+      - '*'
 
 jobs:
-  vercel_deploy:
-    name: Deploy to vercel
+  publish_image:
+    name: Build and push akizuki image
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v7
-      - name: Merge to branch vercel
-        uses: devmasx/merge-branch@1.4.0
+      - name: Remove 'v' from tag
+        env:
+          github_ref: ${{ github.ref }}
+        run: |
+          github_ref=${github_ref##*/}
+          github_ref=${github_ref/v/}
+          echo "IMG_TAG=${github_ref}" >> $GITHUB_ENV
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+      - name: Auth gcloud
+        uses: google-github-actions/auth@v3
         with:
-          type: now
-          target_branch: vercel
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-  netlify_deploy:
-    name: Deploy to netlify
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v7
-      - name: Merge to branch netlify
-        uses: devmasx/merge-branch@1.4.0
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v3
+      - name: Setup docker
+        run: |
+          gcloud --quiet auth configure-docker ${{ secrets.GCR_HOSTNAME }}
+      - name: Build and push image
+        uses: docker/build-push-action@v7
         with:
-          type: now
-          target_branch: netlify
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          context: .
+          file: ./.github/Dockerfile
+          push: true
+          build-args: |
+            "API_HOST_AKATSUKI=${{ secrets.API_HOST_AKATSUKI }}"
+            "NEXT_PUBLIC_MAL_HOST=${{ secrets.NEXT_PUBLIC_MAL_HOST }}"
+            "NEXT_PUBLIC_GA_ID=${{ secrets.NEXT_PUBLIC_GA_ID }}"
+          tags: |
+            ${{ secrets.GCR_HOSTNAME }}/${{ secrets.GCP_PROJECT_ID }}/ikazuchi:latest
+            ${{ secrets.GCR_HOSTNAME }}/${{ secrets.GCP_PROJECT_ID }}/ikazuchi:${{ env.IMG_TAG }}
