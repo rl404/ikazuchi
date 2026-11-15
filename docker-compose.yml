@@ -2,7 +2,11 @@ services:
   ikazuchi:
     container_name: ikazuchi
     image: rl404/ikazuchi:latest
-    build: .
-    restart: always
+    build:
+      context: .
+      args:
+        API_HOST_AKATSUKI: ${API_HOST_AKATSUKI}
+        NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID}
+    restart: unless-stopped
     env_file: .env
     network_mode: host

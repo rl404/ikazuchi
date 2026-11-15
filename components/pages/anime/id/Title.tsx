@@ -1,5 +1,6 @@
 import ChevronDownIcon from '@/components/icons/ChevronDownIcon';
 import { inViewVariants } from '@/components/transitions/variants';
+import { MAL_HOST } from '@/libs/constant';
 import { Anime } from '@/pages/api/anime/[id]';
 import { Variants, motion } from 'framer-motion';
 import { useState } from 'react';
@@ -30,7 +31,7 @@ export default function Title({ anime }: { anime: Anime }) {
 				<div>
 					<a
 						className="gradient-text-none hover:gradient-text text-5xl hover:opacity-100"
-						href={`${process.env.NEXT_PUBLIC_MAL_HOST}/anime/${anime.id}`}
+						href={`${MAL_HOST}/anime/${anime.id}`}
 						target="_blank"
 						referrerPolicy="no-referrer"
 					>

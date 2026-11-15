@@ -1,3 +1,5 @@
+export const MAL_HOST = 'https://myanimelist.net';
+
 export const AnimeType = {
 	tv: 'TV',
 	ova: 'OVA',

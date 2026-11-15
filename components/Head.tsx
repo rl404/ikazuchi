@@ -1,4 +1,3 @@
-import GA from './GA';
 import _Head from 'next/head';
 
 export default function Head({
@@ -26,7 +25,6 @@ export default function Head({
 				<meta name="twitter:card" content="summary_large_image" />
 				<link rel="icon" href="/favicon.ico" />
 			</_Head>
-			<GA />
 		</>
 	);
 }
