@@ -26,22 +26,22 @@ _More will be coming soon..._
 
 1. Clone the repo.
 
-```sh
-git clone https://github.com/rl404/ikazuchi
-```
+   ```sh
+   git clone https://github.com/rl404/ikazuchi
+   ```
 
 2. Modify `.env` with values according to your setup.
 3. Install depedencies.
 
-```sh
-npm ci
-```
+   ```sh
+   npm i
+   ```
 
 4. Start.
 
-```sh
-npm run dev
-```
+   ```sh
+   npm run dev
+   ```
 
 5. [http://localhost:3000](http://localhost:3000) is ready.
 
