@@ -1,4 +1,5 @@
 import { inViewVariants } from '@/components/transitions/variants';
+import { MAL_HOST } from '@/libs/constant';
 import { Studio } from '@/pages/api/studios/[id]';
 import { motion } from 'framer-motion';
 
@@ -13,7 +14,7 @@ export default function Title({ studio }: { studio: Studio }) {
 			Studio{' '}
 			<a
 				className="gradient-text-none hover:gradient-text hover:opacity-100"
-				href={`${process.env.NEXT_PUBLIC_MAL_HOST}/anime/producer/${studio.id}`}
+				href={`${MAL_HOST}/anime/producer/${studio.id}`}
 				target="_blank"
 				referrerPolicy="no-referrer"
 			>
