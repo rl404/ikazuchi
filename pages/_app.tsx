@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout';
 import InitTransition from '@/components/transitions/InitTransition';
 import '@/styles/globals.css';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { AppProps } from 'next/app';
 import { Roboto } from 'next/font/google';
 
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 			<Layout>
 				<Component {...pageProps} key={router.asPath} />
 			</Layout>
+			<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
 		</main>
 	);
 }
